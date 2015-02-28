@@ -1,0 +1,3 @@
+[submodule "strfry/testdata"]
+	path = strfry/testdata
+	url = https://github.com/jamesturk/strfry-testdata.git
