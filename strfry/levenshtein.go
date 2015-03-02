@@ -1,5 +1,7 @@
 package strfry
 
+import "fmt"
+
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -49,11 +51,14 @@ func Levenshtein(s1, s2 string) int {
 }
 
 func DamerauLevenshtein(s1, s2 string) int {
-	len1 := len(s1)
-	len2 := len(s2)
+	r1 := []rune(s1)
+	r2 := []rune(s2)
+	len1 := len(r1)
+	len2 := len(r2)
+	fmt.Println(r1, r2, len1, len2)
 	infinite := len1 + len2
 
-	da := make(map[uint8]int)
+	da := make(map[rune]int)
 	score := make([][]int, len1+2)
 	for i := range score {
 		score[i] = make([]int, len2+2)
@@ -72,10 +77,10 @@ func DamerauLevenshtein(s1, s2 string) int {
 	for i := 1; i < len1+1; i++ {
 		db := 0
 		for j := 1; j < len2+1; j++ {
-			i1 := da[s2[j-1]]
+			i1 := da[r2[j-1]]
 			j1 := db
 			cost := 1
-			if s1[i-1] == s2[j-1] {
+			if r1[i-1] == r2[j-1] {
 				cost = 0
 				db = j
 			}
@@ -83,7 +88,7 @@ func DamerauLevenshtein(s1, s2 string) int {
 			score[i+1][j+1] = min(min(score[i][j]+cost, score[i+1][j]+1), min(score[i][j+1]+1, score[i1][j1]+(i-i1-1)+1+(j-j1-1)))
 		}
 
-		da[s1[i-1]] = i
+		da[r1[i-1]] = i
 	}
 	return score[len1+1][len2+1]
 }
