@@ -82,3 +82,15 @@ func TestJaroWinkler(t *testing.T) {
 		}
 	}
 }
+
+func TestMatchRatingCodex(t *testing.T) {
+	testdata := getTestdata("testdata/match_rating_codex.csv", t)
+
+	for _, row := range testdata {
+		res := MatchRatingCodex(row[0])
+
+		if res != row[1] {
+			t.Errorf("MatchRatingCodex(%q) => %q, expected %q", row[0], res, row[1])
+		}
+	}
+}
