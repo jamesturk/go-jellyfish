@@ -1,13 +1,5 @@
 package strfry
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	} else {
-		return b
-	}
-}
-
 func Levenshtein(s1, s2 string) int {
 	if s1 == s2 {
 		return 0
