@@ -94,3 +94,16 @@ func TestMatchRatingCodex(t *testing.T) {
 		}
 	}
 }
+
+func TestMatchRatingComparison(t *testing.T) {
+	testdata := getTestdata("testdata/match_rating_comparison.csv", t)
+
+	for _, row := range testdata {
+		res := MatchRatingComparison(row[0], row[1])
+		expected := (row[2] == "True")
+
+		if res != expected {
+			t.Errorf("MatchRatingCodex(%q, %q) => %t, expected %t", row[0], row[1], res, expected)
+		}
+	}
+}
