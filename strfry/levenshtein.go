@@ -1,7 +1,5 @@
 package strfry
 
-import "fmt"
-
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -55,7 +53,6 @@ func DamerauLevenshtein(s1, s2 string) int {
 	r2 := []rune(s2)
 	len1 := len(r1)
 	len2 := len(r2)
-	fmt.Println(r1, r2, len1, len2)
 	infinite := len1 + len2
 
 	da := make(map[rune]int)
