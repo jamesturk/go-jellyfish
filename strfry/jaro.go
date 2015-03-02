@@ -9,10 +9,14 @@ func max(a, b int) int {
 }
 
 func Jaro(s1, s2 string) float64 {
-	return jaroWinkler(s1, s2, 0, false)
+	return jaroWinkler(s1, s2, false, false)
 }
 
-func jaroWinkler(s1, s2 string, long_tolerance float64, winklerize bool) float64 {
+func JaroWinkler(s1, s2 string) float64 {
+	return jaroWinkler(s1, s2, false, true)
+}
+
+func jaroWinkler(s1, s2 string, long_tolerance, winklerize bool) float64 {
 	r1 := []rune(s1)
 	r2 := []rune(s2)
 	len1 := len(r1)
@@ -79,6 +83,22 @@ func jaroWinkler(s1, s2 string, long_tolerance float64, winklerize bool) float64
 	// adjust for similarities in nonmatched characters
 	ccf := float64(common_chars)
 	weight := (ccf/float64(len1) + ccf/float64(len2) + (ccf-float64(trans_count))/ccf) / 3
+
+	// winkler modification: boost if strings are similar
+	if winklerize && weight > 0.7 && len1 > 3 && len2 > 3 {
+		j := min(min_len, 4)
+		i := 0
+
+		for i < j && r1[i] == r2[i] {
+			i++
+		}
+
+		if i != 0 {
+			weight += float64(i) * 0.1 * (1 - weight)
+		}
+
+		// TODO: add long_tolerance? optionally adjust for long strings
+	}
 
 	return weight
 }
