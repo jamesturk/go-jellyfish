@@ -2,6 +2,7 @@ package strfry
 
 import (
 	"encoding/csv"
+	"math"
 	"os"
 	"strconv"
 	"testing"
@@ -48,6 +49,21 @@ func TestDamerauLevenshtein(t *testing.T) {
 		}
 		if res != expected {
 			t.Errorf("DamerauLevenshtein(%q, %q) => %d, expected %d", row[0], row[1], res, expected)
+		}
+	}
+}
+
+func TestJaro(t *testing.T) {
+	testdata := getTestdata("testdata/jaro_distance.csv", t)
+
+	for _, row := range testdata {
+		res := Jaro(row[0], row[1])
+		expected, err := strconv.ParseFloat(row[2], 64)
+		if err != nil {
+			t.Error("bad row in test data")
+		}
+		if math.Abs(res-expected) > 0.001 {
+			t.Errorf("Jaro(%q, %q) => %.3f, expected %.3f", row[0], row[1], res, expected)
 		}
 	}
 }
