@@ -1,10 +1,5 @@
 package jellyfish
 
-import (
-	"golang.org/x/text/unicode/norm"
-	"strings"
-)
-
 func Soundex(str string) string {
 	if str == "" {
 		return ""
@@ -24,8 +19,7 @@ func Soundex(str string) string {
 	count := 1
 
 	// normalize and convert to runes
-	str = string(norm.NFKD.Bytes([]byte(str)))
-	runes := []rune(strings.ToUpper(str))
+	runes := normalize(str)
 	result[0] = runes[0]
 
 	// find would-be replacement for first character
