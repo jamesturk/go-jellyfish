@@ -1,4 +1,4 @@
-package strfry
+package jellyfish
 
 func Jaro(s1, s2 string) float64 {
 	return jaroWinkler(s1, s2, false, false)

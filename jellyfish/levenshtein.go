@@ -1,4 +1,4 @@
-package strfry
+package jellyfish
 
 func Levenshtein(s1, s2 string) int {
 	if s1 == s2 {

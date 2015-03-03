@@ -1,4 +1,4 @@
-package strfry
+package jellyfish
 
 func Hamming(s1, s2 string) int {
 	r1 := []rune(s1)

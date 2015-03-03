@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/jamesturk/go-strfry.svg)](https://travis-ci.org/jamesturk/go-strfry)
+[![Build Status](https://travis-ci.org/jamesturk/go-jellyfish.svg)](https://travis-ci.org/jamesturk/go-jellyfish)

@@ -1,4 +1,4 @@
-package strfry
+package jellyfish
 
 import (
 	"strings"

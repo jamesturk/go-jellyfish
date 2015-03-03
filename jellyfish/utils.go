@@ -1,4 +1,4 @@
-package strfry
+package jellyfish
 
 func max(a, b int) int {
 	if a > b {
