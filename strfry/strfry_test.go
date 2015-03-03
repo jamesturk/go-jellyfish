@@ -134,3 +134,14 @@ func TestHamming(t *testing.T) {
 		}
 	}
 }
+
+func TestNysiis(t *testing.T) {
+	testdata := getTestdata("testdata/nysiis.csv", t)
+
+	for _, row := range testdata {
+		res := Nysiis(row[0])
+		if res != row[1] {
+			t.Errorf("Nysiis(%q) => %q, expected %q", row[0], res, row[1])
+		}
+	}
+}
