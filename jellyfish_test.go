@@ -145,3 +145,14 @@ func TestNysiis(t *testing.T) {
 		}
 	}
 }
+
+func TestMetaphone(t *testing.T) {
+	testdata := getTestdata("testdata/metaphone.csv", t)
+
+	for _, row := range testdata {
+		res := Metaphone(row[0])
+		if res != row[1] {
+			t.Errorf("Metaphone(%q) => %q, expected %q", row[0], res, row[1])
+		}
+	}
+}
