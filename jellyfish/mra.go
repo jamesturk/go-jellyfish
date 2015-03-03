@@ -4,10 +4,6 @@ import (
 	"strings"
 )
 
-func isVowel(ch rune) bool {
-	return ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U'
-}
-
 func MatchRatingCodex(str string) string {
 	str = strings.ToUpper(str)
 	var prev rune
