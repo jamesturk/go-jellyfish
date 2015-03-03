@@ -22,6 +22,7 @@ String comparison:
 Phonetic encoding:
 
 * American Soundex
+* Metaphone
 * NYSIIS (New York State Identification and Intelligence System)
 * Match Rating Codex
 
