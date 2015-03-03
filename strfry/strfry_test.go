@@ -119,3 +119,18 @@ func TestSoundex(t *testing.T) {
 		}
 	}
 }
+
+func TestHamming(t *testing.T) {
+	testdata := getTestdata("testdata/hamming.csv", t)
+
+	for _, row := range testdata {
+		res := Hamming(row[0], row[1])
+		expected, err := strconv.Atoi(row[2])
+		if err != nil {
+			t.Error("bad row in test data")
+		}
+		if res != expected {
+			t.Errorf("Hamming(%q, %q) => %d, expected %d", row[0], row[1], res, expected)
+		}
+	}
+}
