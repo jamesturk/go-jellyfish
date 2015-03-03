@@ -107,3 +107,15 @@ func TestMatchRatingComparison(t *testing.T) {
 		}
 	}
 }
+
+func TestSoundex(t *testing.T) {
+	testdata := getTestdata("testdata/soundex.csv", t)
+
+	for _, row := range testdata {
+		res := Soundex(row[0])
+
+		if res != row[1] {
+			t.Errorf("Soundex(%q) => %q, expected %q", row[0], res, row[1])
+		}
+	}
+}
