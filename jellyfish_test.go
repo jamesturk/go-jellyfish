@@ -8,23 +8,23 @@ import (
 	"testing"
 )
 
-func getTestdata(filename string, t *testing.T) [][]string {
+func getTestdata(filename string) [][]string {
 	csvfile, err := os.Open(filename)
 	if err != nil {
-		t.Error("no test data file")
+		panic("no test data file " + filename)
 	}
 	defer csvfile.Close()
 	reader := csv.NewReader(csvfile)
 	testdata, err := reader.ReadAll()
 	if err != nil {
-		t.Error("error reading test data")
+		panic("error reading test data " + filename)
 	}
 
 	return testdata
 }
 
 func TestLevenshtein(t *testing.T) {
-	testdata := getTestdata("testdata/levenshtein.csv", t)
+	testdata := getTestdata("testdata/levenshtein.csv")
 
 	for _, row := range testdata {
 		res := Levenshtein(row[0], row[1])
@@ -39,7 +39,7 @@ func TestLevenshtein(t *testing.T) {
 }
 
 func TestDamerauLevenshtein(t *testing.T) {
-	testdata := getTestdata("testdata/damerau_levenshtein.csv", t)
+	testdata := getTestdata("testdata/damerau_levenshtein.csv")
 
 	for _, row := range testdata {
 		res := DamerauLevenshtein(row[0], row[1])
@@ -54,7 +54,7 @@ func TestDamerauLevenshtein(t *testing.T) {
 }
 
 func TestJaro(t *testing.T) {
-	testdata := getTestdata("testdata/jaro_distance.csv", t)
+	testdata := getTestdata("testdata/jaro_distance.csv")
 
 	for _, row := range testdata {
 		res := Jaro(row[0], row[1])
@@ -69,7 +69,7 @@ func TestJaro(t *testing.T) {
 }
 
 func TestJaroWinkler(t *testing.T) {
-	testdata := getTestdata("testdata/jaro_winkler.csv", t)
+	testdata := getTestdata("testdata/jaro_winkler.csv")
 
 	for _, row := range testdata {
 		res := JaroWinkler(row[0], row[1])
@@ -84,7 +84,7 @@ func TestJaroWinkler(t *testing.T) {
 }
 
 func TestMatchRatingCodex(t *testing.T) {
-	testdata := getTestdata("testdata/match_rating_codex.csv", t)
+	testdata := getTestdata("testdata/match_rating_codex.csv")
 
 	for _, row := range testdata {
 		res := MatchRatingCodex(row[0])
@@ -96,7 +96,7 @@ func TestMatchRatingCodex(t *testing.T) {
 }
 
 func TestMatchRatingComparison(t *testing.T) {
-	testdata := getTestdata("testdata/match_rating_comparison.csv", t)
+	testdata := getTestdata("testdata/match_rating_comparison.csv")
 
 	for _, row := range testdata {
 		res := MatchRatingComparison(row[0], row[1])
@@ -109,7 +109,7 @@ func TestMatchRatingComparison(t *testing.T) {
 }
 
 func TestSoundex(t *testing.T) {
-	testdata := getTestdata("testdata/soundex.csv", t)
+	testdata := getTestdata("testdata/soundex.csv")
 
 	for _, row := range testdata {
 		res := Soundex(row[0])
@@ -121,7 +121,7 @@ func TestSoundex(t *testing.T) {
 }
 
 func TestHamming(t *testing.T) {
-	testdata := getTestdata("testdata/hamming.csv", t)
+	testdata := getTestdata("testdata/hamming.csv")
 
 	for _, row := range testdata {
 		res := Hamming(row[0], row[1])
@@ -136,7 +136,7 @@ func TestHamming(t *testing.T) {
 }
 
 func TestNysiis(t *testing.T) {
-	testdata := getTestdata("testdata/nysiis.csv", t)
+	testdata := getTestdata("testdata/nysiis.csv")
 
 	for _, row := range testdata {
 		res := Nysiis(row[0])
@@ -147,7 +147,7 @@ func TestNysiis(t *testing.T) {
 }
 
 func TestMetaphone(t *testing.T) {
-	testdata := getTestdata("testdata/metaphone.csv", t)
+	testdata := getTestdata("testdata/metaphone.csv")
 
 	for _, row := range testdata {
 		res := Metaphone(row[0])
@@ -158,7 +158,7 @@ func TestMetaphone(t *testing.T) {
 }
 
 func TestPorter(t *testing.T) {
-	testdata := getTestdata("testdata/porter.csv", t)
+	testdata := getTestdata("testdata/porter.csv")
 	wrong := 0
 	total := 0
 
