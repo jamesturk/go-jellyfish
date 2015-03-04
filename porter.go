@@ -118,13 +118,13 @@ func one_c(str []rune) []rune {
 }
 
 // helper func for steps 2-4
-func cond_replace(str []rune, replacements map[string]string, min_measure int) []rune {
-	for from, to := range replacements {
-		if ends_with(str, from) {
-			tmp := str[:len(str)-len(from)]
+func cond_replace(str []rune, replacements []replacement, min_measure int) []rune {
+	for _, r := range replacements {
+		if ends_with(str, r.from) {
+			tmp := str[:len(str)-len(r.from)]
 			if measure(tmp) > min_measure {
-				if to != "" {
-					return append(tmp, []rune(to)...)
+				if r.to != "" {
+					return append(tmp, []rune(r.to)...)
 				} else {
 					return tmp
 				}
@@ -135,69 +135,73 @@ func cond_replace(str []rune, replacements map[string]string, min_measure int) [
 	return str
 }
 
+type replacement struct {
+	from, to string
+}
+
 func two(str []rune) []rune {
-	replacements := map[string]string{
-		"ational": "ate",
-		"tional":  "tion",
-		"enci":    "ence",
-		"anci":    "ance",
-		"izer":    "ize",
-		"abli":    "able",
-		"bli":     "ble",
-		"alli":    "al",
-		"entli":   "ent",
-		"eli":     "e",
-		"ousli":   "ous",
-		"ization": "ize",
-		"ation":   "ate",
-		"ator":    "ate",
-		"alism":   "al",
-		"iveness": "ive",
-		"fulness": "full",
-		"ousness": "ous",
-		"aliti":   "al",
-		"iviti":   "ive",
-		"biliti":  "ble",
-		"logi":    "log",
+	replacements := []replacement{
+		{"ational", "ate"},
+		{"tional", "tion"},
+		{"enci", "ence"},
+		{"anci", "ance"},
+		{"izer", "ize"},
+		{"abli", "able"},
+		{"bli", "ble"},
+		{"alli", "al"},
+		{"entli", "ent"},
+		{"eli", "e"},
+		{"ousli", "ous"},
+		{"ization", "ize"},
+		{"ation", "ate"},
+		{"ator", "ate"},
+		{"alism", "al"},
+		{"iveness", "ive"},
+		{"fulness", "full"},
+		{"ousness", "ous"},
+		{"aliti", "al"},
+		{"iviti", "ive"},
+		{"biliti", "ble"},
+		{"logi", "log"},
 	}
 	return cond_replace(str, replacements, 0)
 }
 
 func three(str []rune) []rune {
-	replacements := map[string]string{
-		"icate": "",
-		"ative": "",
-		"alize": "",
-		"iciti": "",
-		"ical":  "",
-		"ful":   "",
-		"ness":  "",
+	replacements := []replacement{
+		{"icate", ""},
+		{"ative", ""},
+		{"alize", ""},
+		{"iciti", ""},
+		{"ical", ""},
+		{"ful", ""},
+		{"ness", ""},
 	}
 	return cond_replace(str, replacements, 0)
 }
 
 func four(str []rune) []rune {
-	replacements := map[string]string{
-		"al":    "",
-		"ance":  "",
-		"ence":  "",
-		"er":    "",
-		"ic":    "",
-		"able":  "",
-		"ible":  "",
-		"ant":   "",
-		"ement": "",
-		"ment":  "",
-		"ent":   "",
-		"tion":  "",
-		"sion":  "",
-		"ou":    "",
-		"ism":   "",
-		"ate":   "",
-		"iti":   "",
-		"ous":   "",
-		"ive":   "",
-		"ize":   "",
+	replacements := []replacement{
+		{"al", ""},
+		{"ance", ""},
+		{"ence", ""},
+		{"er", ""},
+		{"ic", ""},
+		{"able", ""},
+		{"ible", ""},
+		{"ant", ""},
+		{"ement", ""},
+		{"ment", ""},
+		{"ent", ""},
+		{"tion", ""},
+		{"sion", ""},
+		{"ou", ""},
+		{"ism", ""},
+		{"ate", ""},
+		{"iti", ""},
+		{"ous", ""},
+		{"ive", ""},
+		{"ize", ""},
 	}
 	return cond_replace(str, replacements, 1)
 }
