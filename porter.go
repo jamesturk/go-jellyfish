@@ -167,7 +167,7 @@ func two(str []rune) []rune {
 		{"ator", "ate"},
 		{"alism", "al"},
 		{"iveness", "ive"},
-		{"fulness", "full"},
+		{"fulness", "ful"},
 		{"ousness", "ous"},
 		{"aliti", "al"},
 		{"iviti", "ive"},
