@@ -1,7 +1,5 @@
 package jellyfish
 
-import "strings"
-
 func consonant(str []rune, i int) bool {
 	switch str[i] {
 	case 'a', 'e', 'i', 'o', 'u':
@@ -238,7 +236,7 @@ func five_b(str []rune) []rune {
 }
 
 func Porter(str string) string {
-	runes := []rune(strings.ToLower(str))
+	runes := []rune(str)
 	if len(runes) > 2 {
 		return string(five_b(five_a(four(three(two(one_c(one_b(one_a(runes)))))))))
 	}
