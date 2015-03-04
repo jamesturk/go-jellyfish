@@ -57,6 +57,7 @@ func ends_with(str []rune, suffix string) bool {
 	return true
 }
 
+// deal with sses, ies, ss, s
 func one_a(str []rune) []rune {
 	slen := len(str)
 	if ends_with(str, "sses") || ends_with(str, "ies") {
@@ -67,6 +68,7 @@ func one_a(str []rune) []rune {
 	return str
 }
 
+// check ending of string for cons-vowel-cons suffix
 func star_o(str []rune) bool {
 	slen := len(str)
 	if slen >= 3 && consonant(str, slen-3) && !consonant(str, slen-2) && consonant(str, slen-1) {
@@ -75,6 +77,7 @@ func star_o(str []rune) bool {
 	return false
 }
 
+// handle (at, bl, iz) suffix and trim cons-cons suffix if it isn't (l, s, z)
 func one_b_a(str []rune) []rune {
 	slen := len(str)
 
@@ -91,6 +94,7 @@ func one_b_a(str []rune) []rune {
 	return str
 }
 
+// handle eed, ed, ing
 func one_b(str []rune) []rune {
 	if ends_with(str, "eed") {
 		if measure(str[:len(str)-3]) > 0 {
@@ -110,6 +114,7 @@ func one_b(str []rune) []rune {
 	return str
 }
 
+// handle y ending
 func one_c(str []rune) []rune {
 	if str[len(str)-1] == 'y' && vowel_in_stem(str[:len(str)-1]) {
 		str[len(str)-1] = 'i'
@@ -206,10 +211,11 @@ func four(str []rune) []rune {
 	return cond_replace(str, replacements, 1)
 }
 
+// sometimes truncate a trailing e
 func five_a(str []rune) []rune {
 	last := len(str) - 1
 	if str[last] == 'e' {
-		tmp := str[:last-1]
+		tmp := str[:last]
 		tmp_meas := measure(tmp)
 		if tmp_meas > 1 || (tmp_meas == 1 && !star_o(tmp)) {
 			return tmp
@@ -218,6 +224,7 @@ func five_a(str []rune) []rune {
 	return str
 }
 
+// handle double l at end of word
 func five_b(str []rune) []rune {
 	slen := len(str)
 	if measure(str) > 1 && str[slen-1] == 'l' && str[slen-1] == str[slen-2] {
