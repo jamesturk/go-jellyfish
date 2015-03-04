@@ -8,6 +8,8 @@ go-jellyfish is based on [the C/Python version of jellyfish](https://github.com/
 
 Written by James Turk <james.p.turk@gmail.com> and released under a BSD-style license.  (See LICENSE for details.)
 
+Porter Stemmer implementation based upon [Alex Gonopolskiy's go-stem](https://github.com/agonopol/go-stem), with permission.
+
 ## Included Algorithms
 
 String comparison:
