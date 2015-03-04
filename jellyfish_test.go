@@ -156,3 +156,21 @@ func TestMetaphone(t *testing.T) {
 		}
 	}
 }
+
+func TestPorter(t *testing.T) {
+	testdata := getTestdata("testdata/porter.csv", t)
+	wrong := 0
+	total := 0
+
+	for _, row := range testdata {
+		res := Porter(row[0])
+		if res != row[1] {
+			t.Errorf("Porter(%q) => %q, expected %q", row[0], res, row[1])
+			wrong++
+		}
+		total++
+	}
+	if wrong > 0 {
+		t.Errorf("%d / %d incorrect", wrong, total)
+	}
+}
