@@ -179,11 +179,11 @@ func two(str []rune) []rune {
 
 func three(str []rune) []rune {
 	replacements := []replacement{
-		{"icate", ""},
+		{"icate", "ic"},
 		{"ative", ""},
-		{"alize", ""},
-		{"iciti", ""},
-		{"ical", ""},
+		{"alize", "al"},
+		{"iciti", "ic"},
+		{"ical", "ic"},
 		{"ful", ""},
 		{"ness", ""},
 	}
