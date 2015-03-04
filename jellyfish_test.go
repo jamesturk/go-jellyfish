@@ -8,6 +8,18 @@ import (
 	"testing"
 )
 
+var lev_testdata [][]string
+var dlev_testdata [][]string
+var jaro_testdata [][]string
+var jwink_testdata [][]string
+var mrcodex_testdata [][]string
+var mrcmp_testdata [][]string
+var soundex_testdata [][]string
+var hamming_testdata [][]string
+var nysiis_testdata [][]string
+var metaphone_testdata [][]string
+var porter_testdata [][]string
+
 func getTestdata(filename string) [][]string {
 	csvfile, err := os.Open(filename)
 	if err != nil {
@@ -23,10 +35,23 @@ func getTestdata(filename string) [][]string {
 	return testdata
 }
 
-func TestLevenshtein(t *testing.T) {
-	testdata := getTestdata("testdata/levenshtein.csv")
+func TestMain(m *testing.M) {
+	lev_testdata = getTestdata("testdata/levenshtein.csv")
+	dlev_testdata = getTestdata("testdata/damerau_levenshtein.csv")
+	jaro_testdata = getTestdata("testdata/jaro_distance.csv")
+	jwink_testdata = getTestdata("testdata/jaro_winkler.csv")
+	mrcodex_testdata = getTestdata("testdata/match_rating_codex.csv")
+	mrcmp_testdata = getTestdata("testdata/match_rating_comparison.csv")
+	soundex_testdata = getTestdata("testdata/soundex.csv")
+	hamming_testdata = getTestdata("testdata/hamming.csv")
+	nysiis_testdata = getTestdata("testdata/nysiis.csv")
+	metaphone_testdata = getTestdata("testdata/metaphone.csv")
+	porter_testdata = getTestdata("testdata/porter.csv")
+	os.Exit(m.Run())
+}
 
-	for _, row := range testdata {
+func TestLevenshtein(t *testing.T) {
+	for _, row := range lev_testdata {
 		res := Levenshtein(row[0], row[1])
 		expected, err := strconv.Atoi(row[2])
 		if err != nil {
@@ -39,9 +64,7 @@ func TestLevenshtein(t *testing.T) {
 }
 
 func TestDamerauLevenshtein(t *testing.T) {
-	testdata := getTestdata("testdata/damerau_levenshtein.csv")
-
-	for _, row := range testdata {
+	for _, row := range dlev_testdata {
 		res := DamerauLevenshtein(row[0], row[1])
 		expected, err := strconv.Atoi(row[2])
 		if err != nil {
@@ -54,9 +77,7 @@ func TestDamerauLevenshtein(t *testing.T) {
 }
 
 func TestJaro(t *testing.T) {
-	testdata := getTestdata("testdata/jaro_distance.csv")
-
-	for _, row := range testdata {
+	for _, row := range jaro_testdata {
 		res := Jaro(row[0], row[1])
 		expected, err := strconv.ParseFloat(row[2], 64)
 		if err != nil {
@@ -69,9 +90,7 @@ func TestJaro(t *testing.T) {
 }
 
 func TestJaroWinkler(t *testing.T) {
-	testdata := getTestdata("testdata/jaro_winkler.csv")
-
-	for _, row := range testdata {
+	for _, row := range jwink_testdata {
 		res := JaroWinkler(row[0], row[1])
 		expected, err := strconv.ParseFloat(row[2], 64)
 		if err != nil {
@@ -84,9 +103,7 @@ func TestJaroWinkler(t *testing.T) {
 }
 
 func TestMatchRatingCodex(t *testing.T) {
-	testdata := getTestdata("testdata/match_rating_codex.csv")
-
-	for _, row := range testdata {
+	for _, row := range mrcodex_testdata {
 		res := MatchRatingCodex(row[0])
 
 		if res != row[1] {
@@ -96,9 +113,7 @@ func TestMatchRatingCodex(t *testing.T) {
 }
 
 func TestMatchRatingComparison(t *testing.T) {
-	testdata := getTestdata("testdata/match_rating_comparison.csv")
-
-	for _, row := range testdata {
+	for _, row := range mrcmp_testdata {
 		res := MatchRatingComparison(row[0], row[1])
 		expected := (row[2] == "True")
 
@@ -109,9 +124,7 @@ func TestMatchRatingComparison(t *testing.T) {
 }
 
 func TestSoundex(t *testing.T) {
-	testdata := getTestdata("testdata/soundex.csv")
-
-	for _, row := range testdata {
+	for _, row := range soundex_testdata {
 		res := Soundex(row[0])
 
 		if res != row[1] {
@@ -121,9 +134,7 @@ func TestSoundex(t *testing.T) {
 }
 
 func TestHamming(t *testing.T) {
-	testdata := getTestdata("testdata/hamming.csv")
-
-	for _, row := range testdata {
+	for _, row := range hamming_testdata {
 		res := Hamming(row[0], row[1])
 		expected, err := strconv.Atoi(row[2])
 		if err != nil {
@@ -136,9 +147,7 @@ func TestHamming(t *testing.T) {
 }
 
 func TestNysiis(t *testing.T) {
-	testdata := getTestdata("testdata/nysiis.csv")
-
-	for _, row := range testdata {
+	for _, row := range nysiis_testdata {
 		res := Nysiis(row[0])
 		if res != row[1] {
 			t.Errorf("Nysiis(%q) => %q, expected %q", row[0], res, row[1])
@@ -147,9 +156,7 @@ func TestNysiis(t *testing.T) {
 }
 
 func TestMetaphone(t *testing.T) {
-	testdata := getTestdata("testdata/metaphone.csv")
-
-	for _, row := range testdata {
+	for _, row := range metaphone_testdata {
 		res := Metaphone(row[0])
 		if res != row[1] {
 			t.Errorf("Metaphone(%q) => %q, expected %q", row[0], res, row[1])
@@ -158,11 +165,10 @@ func TestMetaphone(t *testing.T) {
 }
 
 func TestPorter(t *testing.T) {
-	testdata := getTestdata("testdata/porter.csv")
 	wrong := 0
 	total := 0
 
-	for _, row := range testdata {
+	for _, row := range porter_testdata {
 		res := Porter(row[0])
 		if res != row[1] {
 			t.Errorf("Porter(%q) => %q, expected %q", row[0], res, row[1])

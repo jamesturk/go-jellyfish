@@ -7,18 +7,6 @@ var float_result float64
 var str_result string
 var bool_result bool
 
-var lev_testdata = getTestdata("testdata/levenshtein.csv")
-var dlev_testdata = getTestdata("testdata/damerau_levenshtein.csv")
-var jaro_testdata = getTestdata("testdata/jaro_distance.csv")
-var jwink_testdata = getTestdata("testdata/jaro_winkler.csv")
-var mrcodex_testdata = getTestdata("testdata/match_rating_codex.csv")
-var mrcmp_testdata = getTestdata("testdata/match_rating_comparison.csv")
-var soundex_testdata = getTestdata("testdata/soundex.csv")
-var hamming_testdata = getTestdata("testdata/hamming.csv")
-var nysiis_testdata = getTestdata("testdata/nysiis.csv")
-var metaphone_testdata = getTestdata("testdata/metaphone.csv")
-var porter_testdata = getTestdata("testdata/porter.csv")
-
 func BenchmarkLevenshtein(b *testing.B) {
 	var res int
 
