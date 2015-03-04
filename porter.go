@@ -128,7 +128,12 @@ func cond_replace(str []rune, replacements []replacement, min_measure int) []run
 		if ends_with(str, r.from) {
 			tmp := str[:len(str)-len(r.from)]
 			if measure(tmp) > min_measure {
-				if r.to != "" {
+				// special case for [st]ion
+				if r.from == "ion" {
+					if len(str) > 4 && (str[len(str)-4] == 's' || str[len(str)-4] == 't') {
+						return str[:len(str)-3]
+					}
+				} else if r.to != "" {
 					return append(tmp, []rune(r.to)...)
 				} else {
 					return tmp
@@ -198,8 +203,7 @@ func four(str []rune) []rune {
 		{"ement", ""},
 		{"ment", ""},
 		{"ent", ""},
-		{"tion", ""},
-		{"sion", ""},
+		{"ion", ""},
 		{"ou", ""},
 		{"ism", ""},
 		{"ate", ""},
