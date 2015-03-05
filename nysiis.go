@@ -2,6 +2,14 @@ package jellyfish
 
 import "strings"
 
+// Nysiis calculates the NYSIIS code for a string.
+//
+// The NYSIIS algorithm is an algorithm developed by the New York State Identification and Intelligence System.  It transforms a word into a phonetic code.  Like Soundex and Metaphone it is primarily intended for use on names (as they would be pronounced in English).
+//
+// For example:
+//     Nysiis("John") == Nysiis("Jan") 	// JAN
+//
+// See the NYSIIS article at Wikipedia (http://en.wikipedia.org/wiki/New_York_State_Identification_and_Intelligence_System) for more details.
 func Nysiis(s string) string {
 	var key []rune
 	runes := []rune(strings.ToUpper(s))

@@ -1,5 +1,16 @@
 package jellyfish
 
+// Levenshtein computes the Levenshtein distance between two strings.
+//
+// Levenshtein distance represents the number of insertions, deletions,
+// and subsititutions required to change one word to another.
+//
+// For example:
+//    Levenshtein("berne", "born") == 2
+// representing the transformation of the first e to o and the
+// deletion of the second e.
+//
+// See the Levenshtein distance article at Wikipedia (http://en.wikipedia.org/wiki/Levenshtein_distance) for more details.
 func Levenshtein(s1, s2 string) int {
 	if s1 == s2 {
 		return 0
@@ -40,6 +51,19 @@ func Levenshtein(s1, s2 string) int {
 	return cur[len(cur)-1]
 }
 
+// DamerauLevenshtein computes the Damerau-Levenshtein distance between two strings.
+//
+// A modification of Levenshtein distance, Damerau-Levenshtein distance counts
+// the number of edits (insertions, deletions, and substitutions) but unlike
+// Levenshtein, considers transpositions (such as ifhs for fish) a single edit.
+//
+// For example:
+//    Levenshtein("fish", "ifsh") == 2          // one deletion, one insertion
+//                                              // but...
+//    DamerauLevenshtein("fish", "ifsh") == 1   // one transposition
+//
+// See the Damerau-Levenshtein distance article at Wikipedia
+// (http://en.wikipedia.org/wiki/Damerau-Levenshtein_distance) for more details.
 func DamerauLevenshtein(s1, s2 string) int {
 	r1 := []rune(s1)
 	r2 := []rune(s2)

@@ -4,6 +4,15 @@ import (
 	"strings"
 )
 
+// MatchRatingCodex calculate the match rating approach value (also called PNI) for a string.
+//
+// The Match rating approach algorithm is an algorithm for determining
+// whether or not two names are pronounced similarly.
+// The algorithm consists of an encoding function (similar to Soundex or NYSIIS)
+// which is implemented here as well as MatchRatingComparison which does
+// the actual comparison.
+//
+// See the Match Rating Approach article at Wikipedia (http://en.wikipedia.org/wiki/Match_rating_approach) for more details.
 func MatchRatingCodex(str string) string {
 	str = strings.ToUpper(str)
 	var prev rune
@@ -25,6 +34,13 @@ func MatchRatingCodex(str string) string {
 	}
 }
 
+// MatchRatingComparison compares two strings using the match rating approach algorithm. Returns true if strings are considered equivalent or false if not.
+//
+// The Match rating approach algorithm is an algorithm for determining whether
+// or not two names are pronounced similarly.  Strings are first encoded
+// using MatchRatingCodex then compared according to the MRA algorithm.
+//
+// See the Match Rating Approach article at Wikipedia (http://en.wikipedia.org/wiki/Match_rating_approach) for more details.
 func MatchRatingComparison(s1, s2 string) bool {
 	codex1 := []rune(MatchRatingCodex(s1))
 	codex2 := []rune(MatchRatingCodex(s2))

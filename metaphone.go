@@ -1,7 +1,15 @@
 package jellyfish
 
+// Metaphone calculates the metaphone code for a string.
+//
+// The Metaphone algorithm was designed as an improvement on Soundex.
+// It transforms a word into a string consisting of '0BFHJKLMNPRSTWXY' where '0' is pronounced 'th' and 'X' is a '[sc]h' sound.
+//
+// For example:
+//    Metaphone("Klumpz") == Metaphone("Clumps")    // KLMPS
+//
+// See the Metaphone article at Wikipedia (http://en.wikipedia.org/wiki/Metaphone) for more details.
 func Metaphone(s string) string {
-	//var result []rune
 	r := normalize(s)
 
 	// skip first character sometimes
