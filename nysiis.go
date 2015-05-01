@@ -21,17 +21,17 @@ func Nysiis(s string) string {
 
 	// step 1 - prefixes
 	switch {
-	case runes[0] == 'M' && runes[1] == 'A' && runes[2] == 'C':
+	case rlen >= 3 && runes[0] == 'M' && runes[1] == 'A' && runes[2] == 'C':
 		runes[1] = 'C'
-	case runes[0] == 'K' && runes[1] == 'N':
+	case rlen >= 2 && runes[0] == 'K' && runes[1] == 'N':
 		runes = runes[1:]
 		rlen--
 	case runes[0] == 'K':
 		runes[0] = 'C'
-	case runes[0] == 'P' && (runes[1] == 'H' || runes[1] == 'F'):
+	case rlen >= 2 && runes[0] == 'P' && (runes[1] == 'H' || runes[1] == 'F'):
 		runes[0] = 'F'
 		runes[1] = 'F'
-	case runes[0] == 'S' && runes[1] == 'C' && runes[2] == 'H':
+	case rlen >= 3 && runes[0] == 'S' && runes[1] == 'C' && runes[2] == 'H':
 		runes[1] = 'S'
 		runes[2] = 'S'
 	}
@@ -102,7 +102,7 @@ func Nysiis(s string) string {
 	}
 
 	// step 5 - remove trailing S
-	if key[len(key)-1] == 'S' {
+	if len(key) > 1 && key[len(key)-1] == 'S' {
 		key = key[:len(key)-1]
 	}
 
@@ -113,7 +113,7 @@ func Nysiis(s string) string {
 	}
 
 	// step 7 - remove trailing A
-	if key[len(key)-1] == 'A' {
+	if len(key) > 1 && key[len(key)-1] == 'A' {
 		key = key[:len(key)-1]
 	}
 
