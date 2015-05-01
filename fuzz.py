@@ -8,7 +8,7 @@ if __name__ == '__main__':
         reader = csv.reader(f)
 
         for n, line in enumerate(reader):
-            with open('fuzz/{}-corpus/{}'.format(sys.argv[1], n), 'w') as out:
+            with open('fuzz/corpus/{}{}'.format(sys.argv[1], n), 'w') as out:
                 out.write(line[0])
     os.system('go-fuzz-build github.com/jamesturk/go-jellyfish/fuzz/{}'.format(sys.argv[1]))
-    os.system('go-fuzz -bin=./{0}-fuzz -corpus=./fuzz/{0}-corpus -workdir=./fuzz/{0}-workdir'.format(sys.argv[1]))
+    os.system('go-fuzz -bin=./{0}-fuzz -corpus=./fuzz/corpus -workdir=./fuzz/{0}-workdir'.format(sys.argv[1]))
