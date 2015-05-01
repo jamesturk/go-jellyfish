@@ -11,19 +11,23 @@ package jellyfish
 // See the Metaphone article at Wikipedia (http://en.wikipedia.org/wiki/Metaphone) for more details.
 func Metaphone(s string) string {
 	r := normalize(s)
+	rlen := len(r)
 
 	// skip first character sometimes
-	switch {
-	case r[0] == 'K' && r[1] == 'N',
-		r[0] == 'G' && r[1] == 'N',
-		r[0] == 'P' && r[1] == 'N',
-		r[0] == 'A' && r[1] == 'C',
-		r[0] == 'W' && r[1] == 'R',
-		r[0] == 'A' && r[1] == 'E':
-		r = r[1:]
+
+	if rlen > 1 {
+		switch {
+		case r[0] == 'K' && r[1] == 'N',
+			r[0] == 'G' && r[1] == 'N',
+			r[0] == 'P' && r[1] == 'N',
+			r[0] == 'A' && r[1] == 'C',
+			r[0] == 'W' && r[1] == 'R',
+			r[0] == 'A' && r[1] == 'E':
+			r = r[1:]
+			rlen -= 1
+		}
 	}
 
-	rlen := len(r)
 	var next rune
 	var nextnext rune
 	var result []rune
