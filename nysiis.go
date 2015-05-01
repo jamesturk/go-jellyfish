@@ -15,6 +15,10 @@ func Nysiis(s string) string {
 	runes := []rune(strings.ToUpper(s))
 	rlen := len(runes)
 
+	if rlen == 0 {
+		return ""
+	}
+
 	// step 1 - prefixes
 	switch {
 	case runes[0] == 'M' && runes[1] == 'A' && runes[2] == 'C':
