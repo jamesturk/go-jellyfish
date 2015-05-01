@@ -37,17 +37,19 @@ func Nysiis(s string) string {
 	}
 
 	// step 2 - suffixes
-	switch {
-	case (runes[rlen-2] == 'I' || runes[rlen-2] == 'E') && runes[rlen-1] == 'E':
-		runes = append(runes[:rlen-2], 'Y')
-		rlen--
-	case runes[rlen-2] == 'D' && runes[rlen-1] == 'T',
-		runes[rlen-2] == 'R' && runes[rlen-1] == 'T',
-		runes[rlen-2] == 'R' && runes[rlen-1] == 'D',
-		runes[rlen-2] == 'N' && runes[rlen-1] == 'T',
-		runes[rlen-2] == 'N' && runes[rlen-1] == 'D':
-		runes = append(runes[:rlen-2], 'D')
-		rlen--
+	if rlen >= 2 {
+		switch {
+		case (runes[rlen-2] == 'I' || runes[rlen-2] == 'E') && runes[rlen-1] == 'E':
+			runes = append(runes[:rlen-2], 'Y')
+			rlen--
+		case runes[rlen-2] == 'D' && runes[rlen-1] == 'T',
+			runes[rlen-2] == 'R' && runes[rlen-1] == 'T',
+			runes[rlen-2] == 'R' && runes[rlen-1] == 'D',
+			runes[rlen-2] == 'N' && runes[rlen-1] == 'T',
+			runes[rlen-2] == 'N' && runes[rlen-1] == 'D':
+			runes = append(runes[:rlen-2], 'D')
+			rlen--
+		}
 	}
 
 	// step 3 - first character from name
@@ -105,7 +107,7 @@ func Nysiis(s string) string {
 	}
 
 	// step 6 - AY=>Y
-	if key[len(key)-2] == 'A' && key[len(key)-1] == 'Y' {
+	if len(key) >= 2 && key[len(key)-2] == 'A' && key[len(key)-1] == 'Y' {
 		key = key[:len(key)-1]
 		key[len(key)-1] = 'Y'
 	}
