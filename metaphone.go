@@ -151,7 +151,7 @@ func Metaphone(s string) string {
 		case 'Z':
 			result = append(result, 'S')
 		case ' ':
-			if result[len(result)-1] != ' ' {
+			if len(result) > 0 && result[len(result)-1] != ' ' {
 				result = append(result, ' ')
 			}
 		}
