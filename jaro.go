@@ -37,7 +37,7 @@ func jaroWinkler(s1, s2 string, long_tolerance, winklerize bool) float64 {
 
 	// look within search range for matched pairs
 	common_chars := 0
-	for i, ch := range s1 {
+	for i, ch := range r1 {
 		low := 0
 		if i > search_range {
 			low = i - search_range
