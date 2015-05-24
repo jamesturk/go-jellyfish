@@ -11,6 +11,10 @@ Written by James Turk <james.p.turk@gmail.com> and released under a BSD-style li
 
 Porter Stemmer implementation based upon [Alex Gonopolskiy's go-stem](https://github.com/agonopol/go-stem), with permission.
 
+## Requirements
+
+Tests require Go >= 1.4
+
 ## Included Algorithms
 
 String comparison:
