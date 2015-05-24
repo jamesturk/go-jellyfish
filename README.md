@@ -1,5 +1,6 @@
 # go-jellyfish
 
+[![GoDoc](https://godoc.org/github.com/jamesturk/go-jellyfish?status.svg)](http://godoc.org/github.com/jamesturk/go-jellyfish)
 [![Build Status](https://travis-ci.org/jamesturk/go-jellyfish.svg)](https://travis-ci.org/jamesturk/go-jellyfish)
 
 go-jellyfish is a Go library for approximate and phonetic matches of strings.

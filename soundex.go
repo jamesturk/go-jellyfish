@@ -1,5 +1,14 @@
 package jellyfish
 
+// Soundex is an algorithm to convert a word (typically a name) to a four
+// digit code in the form 'A123' where 'A' is the first letter of the name
+// and the digits represent similar sounds.
+//
+// For example:
+//     soundex("Ann") == soundex("Anne")      // A500
+//     soundex("Rupert") == soundex("Robert") // R163
+//
+// See the Soundex article at Wikipedia (http://en.wikipedia.org/wiki/Soundex) for more details.
 func Soundex(str string) string {
 	if str == "" {
 		return ""

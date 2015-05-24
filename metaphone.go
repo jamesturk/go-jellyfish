@@ -1,21 +1,33 @@
 package jellyfish
 
+// Metaphone calculates the metaphone code for a string.
+//
+// The Metaphone algorithm was designed as an improvement on Soundex.
+// It transforms a word into a string consisting of '0BFHJKLMNPRSTWXY' where '0' is pronounced 'th' and 'X' is a '[sc]h' sound.
+//
+// For example:
+//    Metaphone("Klumpz") == Metaphone("Clumps")    // KLMPS
+//
+// See the Metaphone article at Wikipedia (http://en.wikipedia.org/wiki/Metaphone) for more details.
 func Metaphone(s string) string {
-	//var result []rune
 	r := normalize(s)
+	rlen := len(r)
 
 	// skip first character sometimes
-	switch {
-	case r[0] == 'K' && r[1] == 'N',
-		r[0] == 'G' && r[1] == 'N',
-		r[0] == 'P' && r[1] == 'N',
-		r[0] == 'A' && r[1] == 'C',
-		r[0] == 'W' && r[1] == 'R',
-		r[0] == 'A' && r[1] == 'E':
-		r = r[1:]
+
+	if rlen > 1 {
+		switch {
+		case r[0] == 'K' && r[1] == 'N',
+			r[0] == 'G' && r[1] == 'N',
+			r[0] == 'P' && r[1] == 'N',
+			r[0] == 'A' && r[1] == 'C',
+			r[0] == 'W' && r[1] == 'R',
+			r[0] == 'A' && r[1] == 'E':
+			r = r[1:]
+			rlen -= 1
+		}
 	}
 
-	rlen := len(r)
 	var next rune
 	var nextnext rune
 	var result []rune
@@ -139,7 +151,7 @@ func Metaphone(s string) string {
 		case 'Z':
 			result = append(result, 'S')
 		case ' ':
-			if result[len(result)-1] != ' ' {
+			if len(result) > 0 && result[len(result)-1] != ' ' {
 				result = append(result, ' ')
 			}
 		}

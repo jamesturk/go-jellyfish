@@ -1,9 +1,17 @@
 package jellyfish
 
+// Jaro computes the Jaro distance between two strings.
+//
+// Jaro distance is a string-edit distance that gives a floating point response in [0,1] where 0 represents two completely dissimilar strings and 1 represents identical strings.
 func Jaro(s1, s2 string) float64 {
 	return jaroWinkler(s1, s2, false, false)
 }
 
+// JaroWinkler computes the Jaro-Winkler distance between two strings.
+//
+// Jaro-Winkler is a modification/improvement to Jaro distance, like Jaro it gives a floating point response in [0,1] where 0 represents two completely dissimilar strings and 1 represents identical strings.
+//
+// See the Jaro-Winkler distance article at Wikipedia (http://en.wikipedia.org/wiki/Jaro-Winkler_distance) for more details.
 func JaroWinkler(s1, s2 string) float64 {
 	return jaroWinkler(s1, s2, false, true)
 }

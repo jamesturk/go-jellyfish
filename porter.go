@@ -1,5 +1,22 @@
 package jellyfish
 
+// Porter returns the stem of the given string using the common Porter stemmer algorithm.
+//
+// Stemming is the process of reducing a word to its root form, for example 'stemmed' to 'stem'.
+//
+// Martin Porter's algorithm is a common algorithm used for stemming English words that works for many purposes.
+//
+// See the official homepage for the Porter Stemming Algorithm (http://tartarus.org/martin/PorterStemmer/) for more details.
+//
+// This Go implementation takes inspiration from Alex Gonopolskiy's go-stem (https://github.com/agonopol/go-stem).
+func Porter(str string) string {
+	runes := []rune(str)
+	if len(runes) > 2 {
+		return string(five_b(five_a(four(three(two(one_c(one_b(one_a(runes)))))))))
+	}
+	return string(runes)
+}
+
 func consonant(str []rune, i int) bool {
 	switch str[i] {
 	case 'a', 'e', 'i', 'o', 'u':
@@ -233,12 +250,4 @@ func five_b(str []rune) []rune {
 		return str[:slen-1]
 	}
 	return str
-}
-
-func Porter(str string) string {
-	runes := []rune(str)
-	if len(runes) > 2 {
-		return string(five_b(five_a(four(three(two(one_c(one_b(one_a(runes)))))))))
-	}
-	return string(runes)
 }
