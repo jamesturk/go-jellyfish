@@ -89,7 +89,7 @@ func Metaphone(s string) string {
 				i++
 			}
 		case 'H':
-			if i == 0 || isVowel(next) || isVowel(r[i-1]) {
+			if i == 0 || isVowel(next) || !isVowel(r[i-1]) {
 				result = append(result, 'H')
 			}
 		case 'K':
@@ -130,7 +130,7 @@ func Metaphone(s string) string {
 			if i == 0 && next == 'H' {
 				i++
 			}
-			if isVowel(nextnext) {
+			if isVowel(nextnext) || nextnext == 0 {
 				result = append(result, 'W')
 			}
 		case 'X':
