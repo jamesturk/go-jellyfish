@@ -7,7 +7,7 @@ go-jellyfish is a Go library for approximate and phonetic matches of strings.
 
 go-jellyfish is based on [the C/Python version of jellyfish](https://github.com/sunlightlabs/jellyfish).
 
-Written by James Turk <james.p.turk@gmail.com> and released under a BSD-style license.  (See LICENSE for details.)
+Written by James Turk <dev@jamesturk.net> and released under a BSD-style license.  (See LICENSE for details.)
 
 Porter Stemmer implementation based upon [Alex Gonopolskiy's go-stem](https://github.com/agonopol/go-stem), with permission.
 
