@@ -22,4 +22,6 @@ jobs:
       run: git submodule update --init
 
     - name: Build
-      run: go test
+      run: 
+        | go get
+        | go test
